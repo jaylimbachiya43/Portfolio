@@ -2,6 +2,7 @@
 import React, { useEffect, useState , useRef } from "react";
 import axios from "axios";
 import ContactForm from "../contactForm";
+import Link from "next/link";
 
 // import Landingicon from "../../../public/landingicon.svg";
 // import Html from "../../../public/html.svg"
@@ -39,22 +40,22 @@ const Explore = () => {
           {" "}
           <span>Building digital</span>
           <span> products, brands, and</span>{" "}
-          <span span className="break-all">
+          <span span className="break-all ">
             experiences{" "}
           </span>
         </h1>
         <h4 className="text-[#999999] ">
           {" "}
-          I am a <span className="text-white">Website Designer</span> and{" "}
-          <span className="text-white">Full Stack Developer</span>.
+          I am a <span className="text-white font-bold animate-ping">Website Designer</span> and{" "}
+          <span className="text-white font-bold  animate-ping">Full Stack Developer</span>.
         </h4>
         <p className=" text-[#999999] ">
           I specialise in UI/UX Design, Responsive Web Design, and Visual
           Development.
         </p>
-        <button className="border bg-white py-2 px-4  text-black mx-auto shadow-lg shadow-white">
+        <Link href='/contact'><button className="border   bg-white py-2 px-4  text-black mx-auto shadow-lg shadow-white">
           Connect with me
-        </button>
+        </button></Link>
         <p className="text-2xl break-words">
           I am exploring different new technologies, libraries, and AI tools.
         </p>

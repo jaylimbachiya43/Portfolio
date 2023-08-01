@@ -9,7 +9,7 @@ const ContactForm = () => {
     console.log({ values });
     try {
       const response = await axios.post(
-        "http://localhost:1337/api/contacts",
+        "https://formspree.io/f/xjvqggqr",
         { data: values }
       );
 

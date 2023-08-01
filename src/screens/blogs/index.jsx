@@ -1,84 +1,88 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-
-
+"use client";
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field } from "formik";
+import Image from "next/image";
 
 import Landingicon from "../../../public/landingicon.svg";
+import axios from "axios";
+import Link from "next/link";
 // import Upload from "../../../public/upload.webp";
-const data = [
-  {
-    id: 1,
-    language: "JavaScript",
-    category: "Scripting",
-    about: "JavaScript is a versatile programming language commonly used for web development. It provides interactivity, dynamic content, and enhances user experience on websites."
-  },
-  {
-    id: 2,
-    language: "Python",
-    category: "General-purpose",
-    about: "Python is a high-level programming language known for its simplicity and readability. It is used for various purposes such as web development, data analysis, artificial intelligence, and more."
-  },
-  {
-    id: 3,
-    language: "Java",
-    category: "Object-oriented",
-    about: "Java is a popular programming language widely used for building enterprise-level applications, Android mobile apps, and server-side development. It offers strong type checking and a rich set of libraries."
-  },
-  {
-    id: 4,
-    language: "C++",
-    category: "Compiled",
-    about: "C++ is a powerful programming language used for system programming, game development, and high-performance applications. It provides low-level control and supports object-oriented programming."
-  },
-  {
-    id: 5,
-    language: "Ruby",
-    category: "Interpreted",
-    about: "Ruby is a dynamic, object-oriented scripting language known for its simplicity and productivity. It is often used for web development, server-side scripting, and automation tasks."
-  }
-];
-
 
 const Blogs = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [getdata, setgetdata] = useState({});
 
-   
+  useEffect(() => {
+    fetchdata();
+  }, []);
+  const fetchdata = async () => {
+    try {
+      const response = await axios.get("http://localhost:1337/api/blogs?populate=*");
+      console.log('he',response.data.data);
+      setBlogs(response.data.data);
+    } catch (error) {
+      console.log("Error fetching product data:", error);
+    }
+  };
 
-      
-    // const [selectedFile, setSelectedFile] = useState(null);
-    // const [previewURL, setPreviewURL] = useState('');
-  
-    // const handleFileChange = (event) => {
-    //   const file = event.target.files[0];
-    //   setSelectedFile(file);
-  
-    //   // Create a preview URL for the selected file
-    //   const reader = new FileReader();
-    //   reader.onloadend = () => {
-    //     setPreviewURL(reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // };
-  
-    // const handleRemove = () => {
-    //   setSelectedFile(null);
-    //   setPreviewURL('');
-    // };
-  
-// const deleteItem = (id) =>{
-// console.log("remove");
-//   const updatedItems = id - 1
-//   delete data[updatedItems];
+  // const editItem = async (id) => {
+  //   // setShowEditForm(true);
+  //   try {
+  //     // const response = await axios.put( `http://localhost:1337/api/skilstechnologies/${id}`)
+  //     const response = await axios.get(
+  //       `http://localhost:1337/api/skilstechnologies/${id}`
+  //     );
+  //     // console.log(response.data.data.attributes);
+  //     setgetdata(response.data.data.attributes);
+  //     console.log(getdata);
+  //   } catch (error) {
+  //     console.log("no response", error);
+  //   }
+  // };
 
-// }
+  // const handleSubmit = (values) => {
+  //   // Make a PUT request to update the data
+  //   axios
+  //     .put(`http://localhost:1337/api/skilstechnologies/${id}`, values)
+  //     .then((response) => {
+  //       // Handle the response after updating the data
+  //       console.log("Data updated successfully:", response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating data:", error);
+  //     });
+  // };
 
-   
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [previewURL, setPreviewURL] = useState('');
+
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+
+  //   // Create a preview URL for the selected file
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     setPreviewURL(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
+
+  // const handleRemove = () => {
+  //   setSelectedFile(null);
+  //   setPreviewURL('');
+  // };
+
   return (
-    <section data-aos="fade-up"
-    data-aos-duration="3000" className='bg-black h-screen text-white py-14 px-12 lg:py-28 lg:px-48 grid gap-10 '>
-    <h1  className="text-4xl font-bold">Connect with me </h1>
- <p className="text-[#999999]">Tell me about your next project</p>
+    <section
+      data-aos="fade-up"
+      data-aos-duration="3000"
+      className="bg-black h-screen text-white py-14 px-12 lg:py-28 lg:px-48 grid gap-10 "
+    >
+      <h1 className="text-4xl font-bold">Blogs </h1>
+      <p className="text-[#999999]">know Technology better !</p>
 
- {/* <div className="flex items-center">
+      {/* <div className="flex items-center">
       <div className="mr-4">
         {previewURL ? (
           <div className="relative">
@@ -121,26 +125,71 @@ const Blogs = () => {
         />
       </div>
     </div> */}
- 
- 
-<div>
-<ul className=''>
-          {
-            data.map((val) => {
-              return(
-              <li key={val.id} className='border rounded-xl border-[#1199EE] mt-5 p-5'>
 
-                  <h1 className='text-base font-bold text-[#1199EE]'>{val.language} </h1>
-                  <p>{val.about}</p>
-                 <button className='mt-4 p-3 bg-red-600 rounded-2xl' >Delete</button>
+      <div>
+        <ul className="">
+          {blogs.map((val) => {
+            return (
+              <li
+                key={val.id}
+                className="border rounded-xl border-[#1199EE] mt-5 p-5"
+              >
+                <div>
+                  <div>
+                    <Image src={val.attributes.img} alt="img" />
+                  </div>
+                  <div className="">
+                    <Link href={"/item/[id]"} as={`/item/${val.id}`}>
+                      <h1 className="text-base font-bold text-[#1199EE]">
+                        {val.attributes.title}{" "}
+                      </h1>
+                    </Link>
+                    <p className="pt-4">{val.attributes.about}</p>
+                  </div>
+                </div>
+                {/* <button
+                  className="mt-4 p-3 bg-red-600 rounded-2xl"
+                 
+                >
+                  Edite
+                </button> */}
               </li>
-            )
+            );
           })}
         </ul>
-</div>
+      </div>
+      {/* <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {() => (
+          <Form>
+            <label htmlFor="name">Name:</label>
+            <Field
+              type="text"
+              id="title"
+              name="title"
+              className="mt-1 p-3 text-white bg-[#605e5e54] rounded-md w-full"
+            />
 
-</section>
-  )
-}
+           
 
-export default Blogs
+            <label htmlFor="about">About:</label>
+            <Field
+              as="textarea"
+              id="about"
+              name="about"
+              className="mt-1 p-3 text-white bg-[#605e5e54] rounded-md w-full"
+            />
+
+            <button
+              type="submit"
+              className="bg-white text-black my-4 w-full py-3 rounded-md hover:bg-[#e7e7e754] hover:text-white transition-colors duration-300"
+            >
+              Update
+            </button>
+          </Form>
+        )}
+      </Formik> */}
+    </section>
+  );
+};
+
+export default Blogs;
