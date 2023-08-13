@@ -2,9 +2,6 @@
 import Navbar from '@/components/navbar'
 import './globals.css'
 import { Inter } from 'next/font/google'
-
-
-// importing aos
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
@@ -33,7 +30,6 @@ export default function RootLayout({ children  }) {
       <div className="lg:grid h-screen lg:grid-cols-[20%_1fr] ">
     <div className="">
     <Navbar />
-    {/* <div className='sm:w-full sm:h-0.5 md:w-full md:h-0.5 lg:w-0.5 lg: bg-[#555555]'></div> */}
     </div>
     <div className='bg-black  lg:overflow-y-auto' >
     {children}
