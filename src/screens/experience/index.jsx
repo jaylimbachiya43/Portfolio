@@ -32,12 +32,7 @@ const experience = [
         about:
           "As a frontend developer, I created an E-commerce website, managing Strapi data. The project utilized React.js, Next.js, Tailwind CSS, and JSX for the frontend, while Node.js and REST APIs handled the backend intricacies.",
       },
-      {
-        id: 2,
-        name: "Open Stack Hub",
-        about:
-          "I developed a company website utilizing React.js, Next.js, Tailwind CSS, and JSX. The site seamlessly integrates data from APIs and offers a rich array of functionalities.",
-      },
+      
     ],
   },
   // Add more experience entries if needed
